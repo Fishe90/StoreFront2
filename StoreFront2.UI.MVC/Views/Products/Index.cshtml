@@ -1,0 +1,91 @@
+﻿@model IEnumerable<StoreFront2.DATA.EF.Products>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.UnitCost)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ImgURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SKU)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UPC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department.DepName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vendor.VenName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.UnitCost)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImgURL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SKU)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UPC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.DepName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vendor.VenName)
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>
