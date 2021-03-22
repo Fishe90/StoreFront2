@@ -155,8 +155,8 @@ namespace StoreFront2.DATA//.EF.Metadata - Namespace Must Match
     #region Products
     public class ProductsMetadata
     {
-        [Display(Name = "Product")]
         [Required]
+        [Display(Name = "Product")]
         [StringLength(50, ErrorMessage = "Product name must not exceed 50 characters.")]
         public string ProdName { get; set; }
 
@@ -171,7 +171,7 @@ namespace StoreFront2.DATA//.EF.Metadata - Namespace Must Match
         [Required]
         public decimal UnitCost { get; set; }
 
-        public byte[] ImgURL { get; set; }
+        public string ImgURL { get; set; }
 
         [Display(Name = "Department ID")]
         [Required]
@@ -189,6 +189,8 @@ namespace StoreFront2.DATA//.EF.Metadata - Namespace Must Match
         [StringLength(12, MinimumLength = 12, ErrorMessage = "UPC must be 12 characters.")]
         public string UPC { get; set; }
     }
+    [MetadataType(typeof(ProductsMetadata))]
+    public partial class Products{}
     #endregion
     #region ProductStatus
     public class ProductStatusMetadata
@@ -207,8 +209,8 @@ namespace StoreFront2.DATA//.EF.Metadata - Namespace Must Match
         [Display(Name = "Order ID")]
         public Nullable<int> OrderID { get; set; }
 
-        [StringLength(12, MinimumLength = 12, ErrorMessage = "Must input 'Discontinued' if product is no longer in production.")]
-        public string Discontinued { get; set; }
+        //[StringLength(12, MinimumLength = 12, ErrorMessage = "Must input 'Discontinued' if product is no longer in production.")]
+        public Nullable<bool> IsDiscontinued { get; set; }
 
         [Required]
         [StringLength(10, ErrorMessage = "Section must not exceed 10 characters.")]

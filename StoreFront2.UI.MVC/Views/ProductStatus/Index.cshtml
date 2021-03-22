@@ -1,0 +1,88 @@
+﻿@model IEnumerable<StoreFront2.DATA.EF.ProductStatus>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Product.ProdName)*@
+            Product
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDiscontinued)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Section)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Col)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Row)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location.LocationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.OrderID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ProdName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InStock)
+        </td>
+        <td>
+            @if (item.IsDiscontinued == true)
+            {
+            <p>YES</p>
+            }
+            else
+            {
+            <p>NO</p>
+            }
+            @*<div class="checkbox">@item.IsDiscontinued</div>*@
+
+                @*<input type="checkbox" id="myCheck" onclick="myFunction()">*@
+  
+            @*@Html.DisplayFor(modelItem => item.IsDiscontinued)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Section)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Col)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Row)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.LocationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order.OrderID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PSID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PSID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PSID })
+        </td>
+    </tr>
+}
+
+</table>

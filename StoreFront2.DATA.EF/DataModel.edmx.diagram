@@ -27,6 +27,8 @@
         <AssociationConnector Association="StoreFrontModel.FK_Products_Vendors" ManuallyRouted="false" />
         <AssociationConnector Association="StoreFrontModel.FK_ProductStatus_Products" ManuallyRouted="false" />
         <AssociationConnector Association="StoreFrontModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StoreFrontModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="StoreFrontModel.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

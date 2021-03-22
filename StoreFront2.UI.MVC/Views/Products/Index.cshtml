@@ -1,19 +1,16 @@
 ﻿@model IEnumerable<StoreFront2.DATA.EF.Products>
 
 @{
+    /**/
+
     ViewBag.Title = "Products";
 }
 
-<div class="container">
-    <h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title</h2>
 
-    @if (User.IsInRole("Admin"))
-    {
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-    }
-
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
     <table class="table">
         <tr>
             <th>
@@ -25,9 +22,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.UnitPrice)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.UnitCost)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImgURL)
             </th>
@@ -58,11 +55,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.UnitPrice)
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.UnitCost)
-                </td>*@
                 <td>
-                    @Html.DisplayFor(modelItem => item.ImgURL)
+                    @Html.DisplayFor(modelItem => item.UnitCost)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ImgURL)*@
+                    <img src="~/Content/img/@item.ImgURL" style="width: 100px; height: 100px; background-size: contain" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SKU)
@@ -88,4 +86,4 @@
         }
 
     </table>
-</div>
+

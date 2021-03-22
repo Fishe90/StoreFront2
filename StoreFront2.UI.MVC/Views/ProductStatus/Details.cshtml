@@ -1,0 +1,82 @@
+﻿@model StoreFront2.DATA.EF.ProductStatus
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductStatus</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InStock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDiscontinued)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDiscontinued)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Section)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Section)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Col)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Col)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Row)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Row)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.LocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.LocationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.OrderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.OrderID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.ProdName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.ProdName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PSID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

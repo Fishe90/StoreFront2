@@ -41,14 +41,16 @@
                     <div class="col-lg-6 text-center text-lg-right">
                         <ul class="menu list-inline mb-0">
                             @*<li class="list-inline-item"><a href="@Url.Action("Login", "Account")" data-toggle="modal" data-target="#login-modal">Login</a></li>*@
-                            <li class="list-inline-item"><a href="@Url.Action("Login", "Account")">Login</a></li>
-                            <li class="list-inline-item"><a href="@Url.Action("Register", "Account")">Register</a></li>
+                            @*<li class="list-inline-item"><a href="@Url.Action("Register", "Account")">Register</a></li>*@
+                            <li class="list-inline-item">@Html.Partial("_LoginPartial")</li>
                             <li class="list-inline-item"><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                             @*<li class="list-inline-item"><a href="~/Content/#">Recently viewed</a></li>*@
                         </ul>
                     </div>
                 </div>
             </div>
+
+            @* Login Modal Pop-Up *@
             <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
@@ -69,7 +71,7 @@
                                 </p>
                             </form>
                             <p class="text-center text-muted">Not registered yet?</p>
-                            <p class="text-center text-muted"><a href="~/Content/register.html"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+                            <p class="text-center text-muted"><a href="@Url.Action("Register","Account")"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
                         </div>
                     </div>
                 </div>
@@ -81,81 +83,54 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 @*<a href="~/Content/index.html" class="navbar-brand home"><img src="~/Content/img/logo.png" alt="Obaju logo" class="d-none d-md-inline-block"><img src="~/Content/img/logo-small.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - go to homepage</span></a>*@
+
+                @* Hamburger Menu Navigation *@
                 <div class="navbar-buttons">
                     <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
                     <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button><a href="~/Content/basket.html" class="btn btn-outline-secondary navbar-toggler"><i class="fa fa-shopping-cart"></i></a>
                 </div>
+
+                @* Main Navigation *@
                 <div id="navigation" class="collapse navbar-collapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a href="@Url.Action("Index", "Home")" class="nav-link active">Home</a></li>
-                        <li class="nav-item"><a href="@Url.Action("Index", "Products")" class="nav-link">Products</a></li>
+                        <li class="nav-item"><a href="@Url.Action("Index", "Home")" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="@Url.Action("CustomerView", "Products")" class="nav-link">Products</a></li>
+                        <li class="nav-item"><a href="@Url.Action("Contact", "Home")" class="nav-link">Contact</a></li>
+                        @if (User.IsInRole("Admin"))
+	{
                         <li class="nav-item dropdown menu-large">
-                            <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Products<b class="caret"></b></a>
+                            <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Admin<b class="caret"></b></a>
                             <ul class="dropdown-menu megamenu">
                                 <li>
                                     <div class="row">
                                         <div class="col-md-6 col-lg-3">
-                                            <h5>Hunting</h5>
+                                            <h5>Admin Functionality</h5>
                                             <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a href="category.html" class="nav-link">T-shirts</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Shirts</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Pants</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Accessories</a></li>
-                                            </ul>
-                                            <h5>Archery</h5>
-                                            <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Trainers</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Sandals</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
+                                                <li class="nav-item"><a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">Roles</a></li>
+                                                <li class="nav-item"><a href="@Url.Action("Index", "UsersAdmin")" class="nav-link">Users</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-lg-3">
-                                            <h5>Fishing</h5>
+                                            <h5>Database Control</h5>
                                             <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Trainers</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Sandals</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Casual</a></li>
-                                            </ul>
-                                            <h5>Firearms</h5>
-                                            <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Trainers</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Sandals</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
+                                                <li class="nav-item"><a href="@Url.Action("Index", "Departments")" class="nav-link">Departments</a></li>
+                                                <li class="nav-item"><a href="@Url.Action("Index", "Employees")" class="nav-link">Employees</a></li>
+                                                <li class="nav-item"><a href="@Url.Action("Index", "Locations")" class="nav-link">Locations</a></li>
+                                                <li class="nav-item"><a href="@Url.Action("Index", "Orders")" class="nav-link">Orders</a></li>
+                                                <li class="nav-item"><a href="@Url.Action("Index", "Products")" class="nav-link">Products</a></li>
+                                                <li class="nav-item"><a href="@Url.Action("Index", "ProductStatus")" class="nav-link">Product Status</a></li>
+                                                <li class="nav-item"><a href="@Url.Action("Index", "Vendors")" class="nav-link">Vendors</a></li>
                                             </ul>
                                         </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <h5>Clothing</h5>
-                                            <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Trainers</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Sandals</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Casual</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Casual</a></li>
-                                            </ul>
-                                            <h5>Sports</h5>
-                                            <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Trainers</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Sandals</a></li>
-                                                <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
-                                            </ul>
-
-                                        </div>
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="banner"><a href="#"><img src="img/banner.jpg" alt="" class="img img-fluid"></a></div>
-                                            <div class="banner"><a href="#"><img src="img/banner2.jpg" alt="" class="img img-fluid"></a></div>
-                                        </div>
+                                        @*<div class="col-md-6 col-lg-3">
+            <div class="banner"><a href="#"><img src="img/banner.jpg" alt="" class="img img-fluid"></a></div>
+            <div class="banner"><a href="#"><img src="img/banner2.jpg" alt="" class="img img-fluid"></a></div>
+        </div>*@
                                     </div>
                                 </li>
                             </ul>
                         </li>
-                        @*@if (User.IsInRole("Admin"))
-                        {*@
-                        <li class="nav-item"><a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">Admin</a></li>
-                            @*//}*@
-                        <li class="nav-item"><a href="@Url.Action("Contact", "Home")" class="nav-link">Contact</a></li>
-
+	}                        
                     </ul>
                     <div class="navbar-buttons d-flex justify-content-end">
                         <!-- /.nav-collapse-->
@@ -179,11 +154,12 @@
         </div>
     </header>
 
-    <div class="col-sm-12 col-md-12 col-lg-12" style="width: 75%; margin: auto">
+    <div class="container">
         <div id="all">
             @RenderBody()
         </div>
     </div>
+
     <!--
     *** FOOTER ***
     _________________________________________________________
@@ -281,5 +257,31 @@
     <script src="~/Content/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
     <script src="~/Content/js/front.js"></script>
     @RenderSection("scripts", required: false)
+    <script>
+        //use the selector values found in your stylesheet for the active class
+        $(function () {
+            $('.navbar-nav > li a').each(function () {
+                //In this example, the class of active is attached to the li, so we must look further into anchor href to determine if it matches the browser URL
+                if ($(this).attr('href') == window.location.pathname) {
+                    //if they match add the correct class name
+                    $(this).addClass('active');
+                    //$(this) refers to the li prior to the each function
+                }
+            });
+        });
+        $(function myFunction() {
+            // Get the checkbox
+            var checkBox = document.getElementById("myCheck");
+            // Get the output text
+            var text = document.getElementById("text");
+
+            // If the checkbox is checked, display the output text
+            if (checkBox.checked == true) {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>

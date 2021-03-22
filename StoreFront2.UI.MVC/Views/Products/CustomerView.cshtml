@@ -1,0 +1,442 @@
+﻿@model IEnumerable<StoreFront2.DATA.EF.Products>
+
+@{
+    /**/
+
+    ViewBag.Title = "Products";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- breadcrumb-->
+                @*<nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">Ladies</li>
+                    </ol>
+                </nav>*@
+            </div>
+            <div class="col-lg-3">
+                <!--
+                *** MENUS AND FILTERS ***
+                _________________________________________________________
+                -->
+                <div class="card sidebar-menu mb-4">
+                    <div class="card-header">
+                        <h3 class="h4 card-title">Categories</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-pills flex-column category-menu">
+                            <li>
+                                <a href="category.html" class="nav-link">
+                                    Hunting<span class="badge badge-secondary">
+                                        @*@Model.Count()*@
+                                        @{int number = 0;
+                                            foreach (var item in Model)
+                                            {
+                                                if (item.Department.DepName == "Hunting")
+                                                {
+                                                    number += 1;
+                                                }
+                                            }
+                                        }
+                                        @number
+                                    </span>
+                                </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="category.html" class="nav-link">Decoys</a></li>
+                                    <li><a href="category.html" class="nav-link">Blinds</a></li>
+                                    <li><a href="category.html" class="nav-link">Accessories</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="category.html" class="nav-link active">
+                                    Fishing<span class="badge badge-light">
+                                        @{ number = 0;
+                                            foreach (var item in Model)
+                                            {
+                                                if (item.Department.DepName == "Fishing")
+                                                {
+                                                    number += 1;
+                                                }
+                                            }
+                                        }
+                                        @number
+                                    </span>
+                                </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="category.html" class="nav-link">Rods</a></li>
+                                    <li><a href="category.html" class="nav-link">Reels</a></li>
+                                    <li><a href="category.html" class="nav-link">Lures</a></li>
+                                    <li><a href="category.html" class="nav-link">Accessories</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="category.html" class="nav-link">
+                                    Clothing<span class="badge badge-secondary">
+                                        @{number = 0;
+                                            foreach (var item in Model)
+                                            {
+                                                if (item.Department.DepName == "Clothing")
+                                                {
+                                                    number += 1;
+                                                }
+                                            }
+                                        }
+                                        @number
+                                    </span>
+                                </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="category.html" class="nav-link">Shirts</a></li>
+                                    <li><a href="category.html" class="nav-link">Pants</a></li>
+                                    <li><a href="category.html" class="nav-link">Shoes</a></li>
+                                    <li><a href="category.html" class="nav-link">Accessories</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="category.html" class="nav-link">
+                                    Archery<span class="badge badge-secondary">
+                                        @{number = 0;
+                                            foreach (var item in Model)
+                                            {
+                                                if (item.Department.DepName == "Archery")
+                                                {
+                                                    number += 1;
+                                                }
+                                            }
+                                        }
+                                        @number
+                                    </span>
+                                </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="category.html" class="nav-link">Bows</a></li>
+                                    <li><a href="category.html" class="nav-link">Accessories</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="category.html" class="nav-link">
+                                    Firearms<span class="badge badge-secondary">
+                                        @{number = 0;
+                                            foreach (var item in Model)
+                                            {
+                                                if (item.Department.DepName == "Firearms")
+                                                {
+                                                    number += 1;
+                                                }
+                                            }
+                                        }
+                                        @number
+                                    </span>
+                                </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="category.html" class="nav-link">Sights</a></li>
+                                    <li><a href="category.html" class="nav-link">Upgrades</a></li>
+                                    <li><a href="category.html" class="nav-link">Accessories</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="category.html" class="nav-link">
+                                    Sports<span class="badge badge-secondary">
+                                        @{number = 0;
+                                            foreach (var item in Model)
+                                            {
+                                                if (item.Department.DepName == "Sports")
+                                                {
+                                                    number += 1;
+                                                }
+                                            }
+                                        }
+                                        @number
+                                    </span>
+                                </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="category.html" class="nav-link">Balls</a></li>
+                                    <li><a href="category.html" class="nav-link">Accessories</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card sidebar-menu mb-4">
+                    <div class="card-header">
+                        <h3 class="h4 card-title">Brands <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+
+                            <div class="form-group">
+
+                                <div class="checkbox">
+                                    @*<label></label>*@
+                                    @*<input type="checkbox">*@
+                                    <div class="form-group">
+                                        @foreach (var vendor in Model)
+                                        {
+                                            if (vendor.Vendor != null)
+                                            {
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"> @vendor.Vendor.VenName (@{ number = 0; }@foreach (var item in Model)
+                                                        {
+                                                            if (item.Vendor.VenName == vendor.Vendor.VenName)
+                                                            {
+                                                                number += 1;
+                                                            }
+                                                        }@number)
+                                                    </label>
+                                                </div>
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
+                                <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                @*<div class="box">
+                    <h1>Ladies</h1>
+                    <p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>
+                </div>*@
+          
+                <div class="row products">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front">
+                                            <a href="@Url.Action("CustomerDetails", new { id = item.ProductID })">
+                                                @if (item.ImgURL != null)
+                                                {
+                                                    <img src="~/Content/img/@item.ImgURL" style="width: 100%; height: 15em; object-fit: contain" alt="" class="img-fluid">
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Content/img/NoImageAva.PNG" style="width: 100%; height: 15em; object-fit: contain" alt="" class="img-fluid">
+                                                }
+                                        </a>
+                                    </div>
+                                    <div class="back">
+                                        <a href="@Url.Action("CustomerDetails", new { id = item.ProductID })">
+                                            @if (item.ImgURL != null)
+                                            {
+                                                <img src="~/Content/img/@item.ImgURL" style="width: 100%; height: 15em; object-fit: contain" alt="" class="img-fluid">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/img/NoImageAva.PNG" style="width: 100%; height: 15em; object-fit: contain" alt="" class="img-fluid">
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="@Url.Action("CustomerDetails", new { id = item.ProductID })">
+                                @if (item.ImgURL != null)
+                                {
+                                    <img src="~/Content/img/@item.ImgURL" style="width: 100%; height: 15em; object-fit: contain" alt="" class="img-fluid">
+                                }
+                                else
+                                {
+                                    <img src="~/Content/img/NoImageAva.PNG" style="width: 100%; height: 15em; object-fit: contain" alt="" class="img-fluid">
+                                }
+                            </a>
+                            <div class="text">
+                                <h3><a href="@Url.Action("CustomerDetails", new { id = item.ProductID })">@item.ProdName.ToString()</a></h3>
+                                <p class="price">
+                                    <del></del>$@Html.DisplayFor(modelItem => item.UnitPrice)
+                                </p>
+                                <p class="buttons"><a href="@Url.Action("CustomerDetails", new { id = item.ProductID })" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
+                            </div>
+                            <!-- /.text-->
+                        </div>
+                        <!-- /.product            -->
+                    </div>
+                }
+
+                    @*<div class="box info-bar">
+            <div class="row">
+                <div class="col-md-12 col-lg-4 products-showing">Showing <strong>12</strong> of <strong>25</strong> products</div>
+                <div class="col-md-12 col-lg-7 products-number-sort">
+                    <form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
+                        <div class="products-number"><strong>Show</strong><a href="#" class="btn btn-sm btn-primary">12</a><a href="#" class="btn btn-outline-secondary btn-sm">24</a><a href="#" class="btn btn-outline-secondary btn-sm">All</a><span>products</span></div>
+                        <div class="products-sort-by mt-2 mt-lg-0">
+                            <strong>Sort by</strong>
+                            <select name="sort-by" class="form-control">
+                                <option>Price</option>
+                                <option>Name</option>
+                                <option>Sales first</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>*@
+
+                    @*<div class="col-lg-4 col-md-6">
+            <div class="product">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="~/Content/img/product1.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="~/Content/img/product1_2.jpg" alt="" class="img-fluid"></a></div>
+                    </div>
+                </div><a href="detail.html" class="invisible"><img src="~/Content/img/product1.jpg" alt="" class="img-fluid"></a>
+                <div class="text">
+                    <h3><a href="detail.html">Fur coat with very but very very long name</a></h3>
+                    <p class="price">
+                        <del></del>$143.00
+                    </p>
+                    <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
+                </div>
+                <!-- /.text-->
+            </div>
+            <!-- /.product            -->
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="product">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="~/Content/img/product2.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="~/Content/img/product2_2.jpg" alt="" class="img-fluid"></a></div>
+                    </div>
+                </div><a href="detail.html" class="invisible"><img src="~/Content/img/product2.jpg" alt="" class="img-fluid"></a>
+                <div class="text">
+                    <h3><a href="detail.html">White Blouse Armani</a></h3>
+                    <p class="price">
+                        <del>$280</del>$143.00
+                    </p>
+                    <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
+                </div>
+                <!-- /.text-->
+                <div class="ribbon sale">
+                    <div class="theribbon">SALE</div>
+                    <div class="ribbon-background"></div>
+                </div>
+                <!-- /.ribbon-->
+                <div class="ribbon new">
+                    <div class="theribbon">NEW</div>
+                    <div class="ribbon-background"></div>
+                </div>
+                <!-- /.ribbon-->
+                <div class="ribbon gift">
+                    <div class="theribbon">GIFT</div>
+                    <div class="ribbon-background"></div>
+                </div>
+                <!-- /.ribbon-->
+            </div>
+            <!-- /.product            -->
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="product">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="~/Content/img/product3.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="~/Content/img/product3_2.jpg" alt="" class="img-fluid"></a></div>
+                    </div>
+                </div><a href="detail.html" class="invisible"><img src="~/Content/img/product3.jpg" alt="" class="img-fluid"></a>
+                <div class="text">
+                    <h3><a href="detail.html">Black Blouse Versace</a></h3>
+                    <p class="price">
+                        <del></del>$143.00
+                    </p>
+                    <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
+                </div>
+                <!-- /.text-->
+            </div>
+            <!-- /.product            -->
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="product">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="~/Content/img/product3.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="~/Content/img/product3_2.jpg" alt="" class="img-fluid"></a></div>
+                    </div>
+                </div><a href="detail.html" class="invisible"><img src="~/Content/img/product3.jpg" alt="" class="img-fluid"></a>
+                <div class="text">
+                    <h3><a href="detail.html">Black Blouse Versace</a></h3>
+                    <p class="price">
+                        <del></del>$143.00
+                    </p>
+                    <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
+                </div>
+                <!-- /.text-->
+            </div>
+            <!-- /.product            -->
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="product">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="~/Content/img/product2.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="~/Content/img/product2_2.jpg" alt="" class="img-fluid"></a></div>
+                    </div>
+                </div><a href="detail.html" class="invisible"><img src="~/Content/img/product2.jpg" alt="" class="img-fluid"></a>
+                <div class="text">
+                    <h3><a href="detail.html">White Blouse Versace</a></h3>
+                    <p class="price">
+                        <del></del>$143.00
+                    </p>
+                    <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
+                </div>
+                <!-- /.text-->
+                <div class="ribbon new">
+                    <div class="theribbon">NEW</div>
+                    <div class="ribbon-background"></div>
+                </div>
+                <!-- /.ribbon-->
+            </div>
+            <!-- /.product            -->
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="product">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><a href="detail.html"><img src="~/Content/img/product1.jpg" alt="" class="img-fluid"></a></div>
+                        <div class="back"><a href="detail.html"><img src="~/Content/img/product1_2.jpg" alt="" class="img-fluid"></a></div>
+                    </div>
+                </div><a href="detail.html" class="invisible"><img src="~/Content/img/product1.jpg" alt="" class="img-fluid"></a>
+                <div class="text">
+                    <h3><a href="detail.html">Fur coat</a></h3>
+                    <p class="price">
+                        <del></del>$143.00
+                    </p>
+                    <p class="buttons"><a href="detail.html" class="btn btn-outline-secondary">View detail</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
+                </div>
+                <!-- /.text-->
+                <div class="ribbon gift">
+                    <div class="theribbon">GIFT</div>
+                    <div class="ribbon-background"></div>
+                </div>
+                <!-- /.ribbon-->
+            </div>
+            <!-- /.product            -->
+        </div>*@
+                    <!-- /.products-->
+                </div>
+                <div class="pages">
+                    <p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a></p>
+                    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                        <ul class="pagination">
+                            <li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+                            <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                            <li class="page-item"><a href="#" class="page-link">5</a></li>
+                            <li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

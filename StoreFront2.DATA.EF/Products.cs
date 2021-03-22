@@ -26,7 +26,7 @@ namespace StoreFront2.DATA.EF
         public string Description { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal UnitCost { get; set; }
-        public byte[] ImgURL { get; set; }
+        public string ImgURL { get; set; }
         public int DepID { get; set; }
         public int VendorID { get; set; }
         public string SKU { get; set; }

@@ -36,5 +36,7 @@ namespace StoreFront2.DATA.EF
         public virtual DbSet<Products> Products1 { get; set; }
         public virtual DbSet<ProductStatus> ProductStatus1 { get; set; }
         public virtual DbSet<Vendors> Vendors1 { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

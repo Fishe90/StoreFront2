@@ -168,9 +168,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductStatusController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
@@ -183,6 +188,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\ImageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\custom.css" />
@@ -193,6 +199,7 @@
     <Content Include="Content\css\style.red.css" />
     <Content Include="Content\css\style.sea.css" />
     <Content Include="Content\css\style.violet.css" />
+    <Content Include="Content\customer-order.html" />
     <Content Include="Content\img\AjaxLoader.gif" />
     <Content Include="Content\img\banner.jpg" />
     <Content Include="Content\img\banner2.jpg" />
@@ -218,6 +225,8 @@
     <Content Include="Content\img\main-slider3.jpg" />
     <Content Include="Content\img\main-slider4.jpg" />
     <Content Include="Content\img\marker.png" />
+    <Content Include="Content\img\NoImage.PNG" />
+    <Content Include="Content\img\NoImageAva.PNG" />
     <Content Include="Content\img\product1.jpg" />
     <Content Include="Content\img\product1_2.jpg" />
     <Content Include="Content\img\product2.jpg" />
@@ -479,9 +488,37 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Departments\Create.cshtml" />
+    <Content Include="Views\Departments\Delete.cshtml" />
+    <Content Include="Views\Departments\Details.cshtml" />
+    <Content Include="Views\Departments\Edit.cshtml" />
+    <Content Include="Views\Departments\Index.cshtml" />
+    <Content Include="Views\Products\CustomerView.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Locations\Create.cshtml" />
+    <Content Include="Views\Locations\Delete.cshtml" />
+    <Content Include="Views\Locations\Details.cshtml" />
+    <Content Include="Views\Locations\Edit.cshtml" />
+    <Content Include="Views\Locations\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\ProductStatus\Create.cshtml" />
+    <Content Include="Views\ProductStatus\Delete.cshtml" />
+    <Content Include="Views\ProductStatus\Details.cshtml" />
+    <Content Include="Views\ProductStatus\Edit.cshtml" />
+    <Content Include="Views\ProductStatus\Index.cshtml" />
+    <Content Include="Views\Products\CustomerDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\ProductImgs\" />
     <Folder Include="Content\vendor\font-awesome\less\" />
     <Folder Include="Content\vendor\font-awesome\scss\" />
     <Folder Include="_Archive\vendor\font-awesome\less\" />
