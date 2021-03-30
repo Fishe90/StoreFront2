@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreFront2.DATA//.EF.Metadata - Namespace Must Match
+namespace StoreFront2.DATA.EF//.Metadata - Namespace Must Match
                           //the location of the original classes
 {
     //class DBStoreFront2Metadata

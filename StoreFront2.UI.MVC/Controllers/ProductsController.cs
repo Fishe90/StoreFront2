@@ -7,7 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using StoreFront2.DATA.EF;
+using StoreFront2.UI.MVC.Models;
 using StoreFront2.UI.MVC.Utilities;
 
 namespace StoreFront2.UI.MVC.Controllers
@@ -16,17 +18,144 @@ namespace StoreFront2.UI.MVC.Controllers
     {
         private StoreFrontEntities db = new StoreFrontEntities();
 
-        public ActionResult CustomerView()
+        //public ActionResult CustomerView()
+        //{
+        //    var products1 = db.Products1.Include(p => p.Department).Include(p => p.Vendor);
+        //    return View(products1.ToList());
+        //}
+
+        //For Search Bar
+        public ViewResult CustomerView(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var products1 = db.Products1.Include(p => p.Department).Include(p => p.Vendor);
-            return View(products1.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "description_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var products = from p in db.Products1
+                           select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(p => p.ProdName.Contains(searchString) || p.Description.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    products = products.OrderByDescending(p => p.ProdName);
+                    break;
+                case "description_desc":
+                    products = products.OrderByDescending(p => p.Description);
+                    break;
+                default:
+                    products = products.OrderBy(p => p.ProdName);
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Products
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var products1 = db.Products1.Include(p => p.Department).Include(p => p.Vendor);
+        //    return View(products1.ToList());
+        //}
+
+        //For Filtering
+        //public ActionResult Index(string sortOrder)
+        //{
+        //    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        //    ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "description_desc" : "";
+        //    var products = from p in db.Products1
+        //                   select p;
+        //    switch (sortOrder)
+        //    {
+        //        case "name_desc":
+        //            products = products.OrderByDescending(p => p.ProdName);
+        //            break;
+        //        case "description_desc":
+        //            products = products.OrderByDescending(p => p.Description);
+        //            break;
+        //        default:
+        //            products = products.OrderBy(p => p.ProdName);
+        //            break;
+        //    }
+        //    return View(products.ToList());
+        //}
+
+        //For Search Bar
+        public ViewResult Index(string sortOrder, string searchString)
         {
-            var products1 = db.Products1.Include(p => p.Department).Include(p => p.Vendor);
-            return View(products1.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "description_desc" : "";
+            var products = from p in db.Products1
+                           select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.ProdName.Contains(searchString) || s.Description.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    products = products.OrderByDescending(p => p.ProdName);
+                    break;
+                case "description_desc":
+                    products = products.OrderByDescending(p => p.Description);
+                    break;
+                default:
+                    products = products.OrderBy(p => p.ProdName);
+                    break;
+            }
+            return View(products.ToList());
+        }
+
+        public ActionResult AddToCart(int qty, int productID)
+        {
+            Dictionary<int, CartItemViewModel> shoppingCart = null;
+
+            if (Session["cart"] != null)
+            {
+                shoppingCart = (Dictionary<int, CartItemViewModel>)Session["cart"];
+            }
+            else
+            {
+                shoppingCart = new Dictionary<int, CartItemViewModel>();
+            }
+
+            Products product = db.Products1.Where(p => p.ProductID == productID).FirstOrDefault();
+
+            if (product == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                CartItemViewModel item = new CartItemViewModel(qty, product);
+
+                if (shoppingCart.ContainsKey(product.ProductID))
+                {
+                    shoppingCart[product.ProductID].Qty += qty;
+                }
+                else
+                {
+                    shoppingCart.Add(product.ProductID, item);
+                }
+                Session["cart"] = shoppingCart;
+            }
+
+            return RedirectToAction("Index", "ShoppingCart");
         }
 
         public ActionResult CustomerDetails(int? id)

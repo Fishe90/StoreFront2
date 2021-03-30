@@ -27,13 +27,13 @@ namespace StoreFront2.UI.MVC.Controllers
         //    return View();
         //}
 
-        //[HttpGet]
-        //public ActionResult Contact()
-        //{
-        //    return View();
-        //}
-
         [HttpGet]
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Contact(ContactViewModel cvm)
         {
             if (ModelState.IsValid)
@@ -41,7 +41,7 @@ namespace StoreFront2.UI.MVC.Controllers
                 string body = $"{cvm.Name} has sent you the following message: <br/>" +
                 $"{cvm.Message} <strong>from the email address:</strong> {cvm.Email}";
 
-                MailMessage m = new MailMessage("admin@dillonfisher.com", "dillon.f12.df@gmail.com", cvm.Subject, body);
+                MailMessage m = new MailMessage("webadmin@dillonfisher.com", "dillon.f617@gmail.com", cvm.Subject, body);
 
                 m.IsBodyHtml = true;
 
@@ -51,9 +51,9 @@ namespace StoreFront2.UI.MVC.Controllers
 
                 SmtpClient client = new SmtpClient("mail.dillonfisher.com");
 
-                client.Credentials = new NetworkCredential("admin@dillonfisher.com", "@Ilikecheese617");
+                client.Credentials = new NetworkCredential("webadmin@dillonfisher.com", "@Ilikecheese617");
 
-                client.Port = 8889;
+                //client.Port = 8889;
 
                 try
                 {

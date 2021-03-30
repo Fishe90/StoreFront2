@@ -1,0 +1,98 @@
+﻿@*@model IEnumerable<StoreFront2.UI.MVC.Models.CartItemViewModel>*@
+
+@model  Dictionary<int, StoreFront2.UI.MVC.Models.CartItemViewModel>
+
+
+@{
+    ViewBag.Title = "Shopping Cart";
+
+    decimal? cartTotal = 0;
+    int totalCountOfItems = 0;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.ActionLink("Back to Shopping", "CustomerView", "Products", null, new { @class = "btn btn-danger"})
+
+@if (ViewBag.Message != null)
+{
+    <h3 style="text-align: center; color: orange;">@ViewBag.Message</h3>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.Value.Product.ImgURL" alt="product image" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value.Product.ProdName)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.Value.Product.UnitPrice)
+                </td>
+                <td>
+                    @using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+                    {
+                        @Html.Hidden("productID", item.Value.Product.ProductID)
+                        @Html.TextBox("qty", item.Value.Qty, new { @class = "form-control", style = "max-width:75px;display:inline;" })
+
+                        <input type="submit" value="Update Quantity" class="btn btn-primary" />
+                    }
+                    @{ totalCountOfItems += item.Value.Qty;}
+                </td>
+                <td>
+                    @{ 
+                        decimal? lineTotal = item.Value.Product.UnitPrice * item.Value.Qty;
+
+                        cartTotal += lineTotal;
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Remove From Cart", "RemoveFromCart", new { id = item.Value.Product.ProductID })
+                </td>
+            </tr>
+        }
+    </table>
+    <p>
+        You have @totalCountOfItems @(totalCountOfItems > 1 ? "products" : "product") in your cart.
+        Your total before taxes and shipping is @string.Format($"{cartTotal:c}")
+    </p>
+}
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Qty)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>*@

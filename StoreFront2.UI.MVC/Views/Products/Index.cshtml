@@ -8,82 +8,97 @@
 
 <h2>@ViewBag.Title</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
     <p>
-        @Html.ActionLink("Create New", "Create")
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
     </p>
-    <table class="table">
-        <tr>
-            <th>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Product", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Description", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        @*<th>
                 @Html.DisplayNameFor(model => model.ProdName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImgURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SKU)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UPC)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department.DepName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vendor.VenName)
-            </th>
-            <th></th>
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImgURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SKU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UPC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department.DepName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendor.VenName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitCost)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.ImgURL)*@
+                <img src="~/Content/img/@item.ImgURL" style="width: 100px; height: 100px; background-size: contain" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SKU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UPC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DepName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendor.VenName)
+            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                </td>
+            }
         </tr>
+    }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProdName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitCost)
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.ImgURL)*@
-                    <img src="~/Content/img/@item.ImgURL" style="width: 100px; height: 100px; background-size: contain" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SKU)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UPC)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department.DepName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Vendor.VenName)
-                </td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
-                    </td>
-                }
-            </tr>
-        }
-
-    </table>
+</table>
 
