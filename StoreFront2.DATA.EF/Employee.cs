@@ -12,7 +12,7 @@ namespace StoreFront2.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Employees
+    public partial class Employee
     {
         public int EmpID { get; set; }
         public int DepID { get; set; }
@@ -27,6 +27,6 @@ namespace StoreFront2.DATA.EF
         public string State { get; set; }
         public string PostalCode { get; set; }
     
-        public virtual Departments Department { get; set; }
+        public virtual Department Department { get; set; }
     }
 }

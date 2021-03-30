@@ -4,18 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ec2a4bf330884597b8dc32c4374a1a03" Name="Diagram1">
+      <Diagram DiagramId="654a92b8c3534242805981372c161886" Name="Diagram1">
         <EntityTypeShape EntityType="StoreFrontModel.AspNetRole" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreFrontModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreFrontModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreFrontModel.AspNetUser" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreFrontModel.Departments" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreFrontModel.Employees" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreFrontModel.Locations" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreFrontModel.Orders" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreFrontModel.Products" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Department" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Employee" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Location" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Order" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Product" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreFrontModel.ProductStatus" Width="1.5" PointX="10.5" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreFrontModel.Vendors" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.UserDetail" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Vendor" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="StoreFrontModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="StoreFrontModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="StoreFrontModel.FK_Employees_Departments" ManuallyRouted="false" />
@@ -27,8 +28,6 @@
         <AssociationConnector Association="StoreFrontModel.FK_Products_Vendors" ManuallyRouted="false" />
         <AssociationConnector Association="StoreFrontModel.FK_ProductStatus_Products" ManuallyRouted="false" />
         <AssociationConnector Association="StoreFrontModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="StoreFrontModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="StoreFrontModel.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

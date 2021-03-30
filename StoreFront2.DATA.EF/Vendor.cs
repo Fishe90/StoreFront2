@@ -12,25 +12,22 @@ namespace StoreFront2.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Locations
+    public partial class Vendor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Locations()
+        public Vendor()
         {
-            this.Orders = new HashSet<Orders>();
-            this.ProductStatus = new HashSet<ProductStatus>();
+            this.Products = new HashSet<Product>();
         }
     
-        public int LocationID { get; set; }
-        public string LocationName { get; set; }
+        public int VendorID { get; set; }
+        public string VenName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string PostalCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductStatus> ProductStatus { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

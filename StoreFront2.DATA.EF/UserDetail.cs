@@ -12,11 +12,11 @@ namespace StoreFront2.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class UserDetail
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public string UserID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ProfilePic { get; set; }
     }
 }

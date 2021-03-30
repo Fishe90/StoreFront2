@@ -19,13 +19,13 @@ namespace StoreFront2.DATA.EF
         public int LocationID { get; set; }
         public short InStock { get; set; }
         public Nullable<int> OrderID { get; set; }
+        public Nullable<bool> IsDiscontinued { get; set; }
         public string Section { get; set; }
         public short Col { get; set; }
         public short Row { get; set; }
-        public Nullable<bool> IsDiscontinued { get; set; }
     
-        public virtual Locations Location { get; set; }
-        public virtual Orders Order { get; set; }
-        public virtual Products Product { get; set; }
+        public virtual Location Location { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

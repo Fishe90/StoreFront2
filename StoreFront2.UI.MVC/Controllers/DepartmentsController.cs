@@ -17,7 +17,7 @@ namespace StoreFront2.UI.MVC.Controllers
         // GET: Departments
         public ActionResult Index()
         {
-            return View(db.Departments1.ToList());
+            return View(db.Departments.ToList());
         }
 
         // GET: Departments/Details/5
@@ -27,7 +27,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Departments departments = db.Departments1.Find(id);
+            Department departments = db.Departments.Find(id);
             if (departments == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DepID,DepName")] Departments departments)
+        public ActionResult Create([Bind(Include = "DepID,DepName")] Department departments)
         {
             if (ModelState.IsValid)
             {
-                db.Departments1.Add(departments);
+                db.Departments.Add(departments);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Departments departments = db.Departments1.Find(id);
+            Department departments = db.Departments.Find(id);
             if (departments == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DepID,DepName")] Departments departments)
+        public ActionResult Edit([Bind(Include = "DepID,DepName")] Department departments)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Departments departments = db.Departments1.Find(id);
+            Department departments = db.Departments.Find(id);
             if (departments == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace StoreFront2.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Departments departments = db.Departments1.Find(id);
-            db.Departments1.Remove(departments);
+            Department departments = db.Departments.Find(id);
+            db.Departments.Remove(departments);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

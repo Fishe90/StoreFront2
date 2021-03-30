@@ -20,8 +20,8 @@ namespace StoreFront2.UI.MVC.Controllers
 
         //public ActionResult CustomerView()
         //{
-        //    var products1 = db.Products1.Include(p => p.Department).Include(p => p.Vendor);
-        //    return View(products1.ToList());
+        //    var Products = db.Products.Include(p => p.Department).Include(p => p.Vendor);
+        //    return View(Products.ToList());
         //}
 
         //For Search Bar
@@ -42,7 +42,7 @@ namespace StoreFront2.UI.MVC.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var products = from p in db.Products1
+            var products = from p in db.Products
                            select p;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -69,8 +69,8 @@ namespace StoreFront2.UI.MVC.Controllers
         // GET: Products
         //public ActionResult Index()
         //{
-        //    var products1 = db.Products1.Include(p => p.Department).Include(p => p.Vendor);
-        //    return View(products1.ToList());
+        //    var Products = db.Products.Include(p => p.Department).Include(p => p.Vendor);
+        //    return View(Products.ToList());
         //}
 
         //For Filtering
@@ -78,7 +78,7 @@ namespace StoreFront2.UI.MVC.Controllers
         //{
         //    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
         //    ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "description_desc" : "";
-        //    var products = from p in db.Products1
+        //    var products = from p in db.Products
         //                   select p;
         //    switch (sortOrder)
         //    {
@@ -100,7 +100,7 @@ namespace StoreFront2.UI.MVC.Controllers
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "description_desc" : "";
-            var products = from p in db.Products1
+            var products = from p in db.Products
                            select p;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -134,7 +134,7 @@ namespace StoreFront2.UI.MVC.Controllers
                 shoppingCart = new Dictionary<int, CartItemViewModel>();
             }
 
-            Products product = db.Products1.Where(p => p.ProductID == productID).FirstOrDefault();
+            Product product = db.Products.Where(p => p.ProductID == productID).FirstOrDefault();
 
             if (product == null)
             {
@@ -164,7 +164,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products1.Find(id);
+            Product products = db.Products.Find(id);
             if (products == null)
             {
                 return HttpNotFound();
@@ -179,7 +179,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products1.Find(id);
+            Product products = db.Products.Find(id);
             if (products == null)
             {
                 return HttpNotFound();
@@ -190,8 +190,8 @@ namespace StoreFront2.UI.MVC.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.DepID = new SelectList(db.Departments1, "DepID", "DepName");
-            ViewBag.VendorID = new SelectList(db.Vendors1, "VendorID", "VenName");
+            ViewBag.DepID = new SelectList(db.Departments, "DepID", "DepName");
+            ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VenName");
             return View();
         }
 
@@ -200,7 +200,7 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,ProdName,Description,UnitPrice,UnitCost,ImgURL,DepID,VendorID,SKU,UPC")] Products products, HttpPostedFileBase imgURL)
+        public ActionResult Create([Bind(Include = "ProductID,ProdName,Description,UnitPrice,UnitCost,ImgURL,DepID,VendorID,SKU,UPC")] Product products, HttpPostedFileBase imgURL)
         {
             if (ModelState.IsValid)
             {
@@ -269,13 +269,13 @@ namespace StoreFront2.UI.MVC.Controllers
                 products.ImgURL = imgName;
                 #endregion
 
-                db.Products1.Add(products);
+                db.Products.Add(products);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DepID = new SelectList(db.Departments1, "DepID", "DepName", products.DepID);
-            ViewBag.VendorID = new SelectList(db.Vendors1, "VendorID", "VenName", products.VendorID);
+            ViewBag.DepID = new SelectList(db.Departments, "DepID", "DepName", products.DepID);
+            ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VenName", products.VendorID);
             return View(products);
         }
 
@@ -286,13 +286,13 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products1.Find(id);
+            Product products = db.Products.Find(id);
             if (products == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.DepID = new SelectList(db.Departments1, "DepID", "DepName", products.DepID);
-            ViewBag.VendorID = new SelectList(db.Vendors1, "VendorID", "VenName", products.VendorID);
+            ViewBag.DepID = new SelectList(db.Departments, "DepID", "DepName", products.DepID);
+            ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VenName", products.VendorID);
             return View(products);
         }
 
@@ -301,7 +301,7 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProdName,Description,UnitPrice,UnitCost,ImgURL,DepID,VendorID,SKU,UPC")] Products products, HttpPostedFileBase imgURL)
+        public ActionResult Edit([Bind(Include = "ProductID,ProdName,Description,UnitPrice,UnitCost,ImgURL,DepID,VendorID,SKU,UPC")] Product products, HttpPostedFileBase imgURL)
         {
             if (ModelState.IsValid)
             {
@@ -374,8 +374,8 @@ namespace StoreFront2.UI.MVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DepID = new SelectList(db.Departments1, "DepID", "DepName", products.DepID);
-            ViewBag.VendorID = new SelectList(db.Vendors1, "VendorID", "VenName", products.VendorID);
+            ViewBag.DepID = new SelectList(db.Departments, "DepID", "DepName", products.DepID);
+            ViewBag.VendorID = new SelectList(db.Vendors, "VendorID", "VenName", products.VendorID);
             return View(products);
         }
 
@@ -386,7 +386,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products1.Find(id);
+            Product products = db.Products.Find(id);
             if (products == null)
             {
                 return HttpNotFound();
@@ -399,8 +399,8 @@ namespace StoreFront2.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Products products = db.Products1.Find(id);
-            db.Products1.Remove(products);
+            Product products = db.Products.Find(id);
+            db.Products.Remove(products);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

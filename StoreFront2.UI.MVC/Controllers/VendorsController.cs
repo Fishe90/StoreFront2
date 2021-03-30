@@ -17,7 +17,7 @@ namespace StoreFront2.UI.MVC.Controllers
         // GET: Vendors
         public ActionResult Index()
         {
-            return View(db.Vendors1.ToList());
+            return View(db.Vendors.ToList());
         }
 
         // GET: Vendors/Details/5
@@ -27,7 +27,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendors vendors = db.Vendors1.Find(id);
+            Vendor vendors = db.Vendors.Find(id);
             if (vendors == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VendorID,VenName,Address,City,State,PostalCode")] Vendors vendors)
+        public ActionResult Create([Bind(Include = "VendorID,VenName,Address,City,State,PostalCode")] Vendor vendors)
         {
             if (ModelState.IsValid)
             {
-                db.Vendors1.Add(vendors);
+                db.Vendors.Add(vendors);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendors vendors = db.Vendors1.Find(id);
+            Vendor vendors = db.Vendors.Find(id);
             if (vendors == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VendorID,VenName,Address,City,State,PostalCode")] Vendors vendors)
+        public ActionResult Edit([Bind(Include = "VendorID,VenName,Address,City,State,PostalCode")] Vendor vendors)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vendors vendors = db.Vendors1.Find(id);
+            Vendor vendors = db.Vendors.Find(id);
             if (vendors == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace StoreFront2.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vendors vendors = db.Vendors1.Find(id);
-            db.Vendors1.Remove(vendors);
+            Vendor vendors = db.Vendors.Find(id);
+            db.Vendors.Remove(vendors);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

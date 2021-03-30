@@ -29,14 +29,13 @@ namespace StoreFront2.DATA.EF
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<Departments> Departments1 { get; set; }
-        public virtual DbSet<Employees> Employees1 { get; set; }
-        public virtual DbSet<Locations> Locations1 { get; set; }
-        public virtual DbSet<Orders> Orders1 { get; set; }
-        public virtual DbSet<Products> Products1 { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Location> Locations { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductStatus> ProductStatus1 { get; set; }
-        public virtual DbSet<Vendors> Vendors1 { get; set; }
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
     }
 }

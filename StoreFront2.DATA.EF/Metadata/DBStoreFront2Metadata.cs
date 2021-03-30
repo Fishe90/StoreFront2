@@ -8,14 +8,6 @@ using System.Threading.Tasks;
 namespace StoreFront2.DATA.EF//.Metadata - Namespace Must Match
                           //the location of the original classes
 {
-    //class DBStoreFront2Metadata
-    //{
-    //    //public partial Department()
-    //    //{
-
-    //    //}
-    //}
-
     #region Department
     public class DepartmentMetadata
     {
@@ -190,7 +182,7 @@ namespace StoreFront2.DATA.EF//.Metadata - Namespace Must Match
         public string UPC { get; set; }
     }
     [MetadataType(typeof(ProductsMetadata))]
-    public partial class Products{}
+    public partial class Product{}
     #endregion
     #region ProductStatus
     public class ProductStatusMetadata
@@ -221,6 +213,30 @@ namespace StoreFront2.DATA.EF//.Metadata - Namespace Must Match
 
         [Required]
         public short Row { get; set; }
+    }
+    #endregion
+    #region UserDetail
+    public class UserDetailsMetadata
+    {
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        public string ProfilePic { get; set; }
+    }
+
+    [MetadataType(typeof(UserDetailsMetadata))]
+    public partial class UserDetail
+    {
+        [Display(Name = "Name")]
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
     }
     #endregion
     #region Vendors

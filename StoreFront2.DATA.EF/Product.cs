@@ -12,12 +12,12 @@ namespace StoreFront2.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Products
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Products()
+        public Product()
         {
-            this.Orders = new HashSet<Orders>();
+            this.Orders = new HashSet<Order>();
             this.ProductStatus = new HashSet<ProductStatus>();
         }
     
@@ -32,10 +32,10 @@ namespace StoreFront2.DATA.EF
         public string SKU { get; set; }
         public string UPC { get; set; }
     
-        public virtual Departments Department { get; set; }
+        public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
-        public virtual Vendors Vendor { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Vendor Vendor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductStatus> ProductStatus { get; set; }
     }

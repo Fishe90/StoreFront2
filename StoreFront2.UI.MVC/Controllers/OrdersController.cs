@@ -17,8 +17,8 @@ namespace StoreFront2.UI.MVC.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            var orders1 = db.Orders1.Include(o => o.Location).Include(o => o.Product);
-            return View(orders1.ToList());
+            var Orders = db.Orders.Include(o => o.Location).Include(o => o.Product);
+            return View(Orders.ToList());
         }
 
         // GET: Orders/Details/5
@@ -28,7 +28,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Orders orders = db.Orders1.Find(id);
+            Order orders = db.Orders.Find(id);
             if (orders == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,8 @@ namespace StoreFront2.UI.MVC.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            ViewBag.LocationID = new SelectList(db.Locations1, "LocationID", "LocationName");
-            ViewBag.ProductID = new SelectList(db.Products1, "ProductID", "ProdName");
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProdName");
             return View();
         }
 
@@ -49,17 +49,17 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderID,ProductID,Quantity,TotalCost,DateOrdered,DateShipped,DateReceived,LocationID")] Orders orders)
+        public ActionResult Create([Bind(Include = "OrderID,ProductID,Quantity,TotalCost,DateOrdered,DateShipped,DateReceived,LocationID")] Order orders)
         {
             if (ModelState.IsValid)
             {
-                db.Orders1.Add(orders);
+                db.Orders.Add(orders);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.LocationID = new SelectList(db.Locations1, "LocationID", "LocationName", orders.LocationID);
-            ViewBag.ProductID = new SelectList(db.Products1, "ProductID", "ProdName", orders.ProductID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", orders.LocationID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProdName", orders.ProductID);
             return View(orders);
         }
 
@@ -70,13 +70,13 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Orders orders = db.Orders1.Find(id);
+            Order orders = db.Orders.Find(id);
             if (orders == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.LocationID = new SelectList(db.Locations1, "LocationID", "LocationName", orders.LocationID);
-            ViewBag.ProductID = new SelectList(db.Products1, "ProductID", "ProdName", orders.ProductID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", orders.LocationID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProdName", orders.ProductID);
             return View(orders);
         }
 
@@ -85,7 +85,7 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderID,ProductID,Quantity,TotalCost,DateOrdered,DateShipped,DateReceived,LocationID")] Orders orders)
+        public ActionResult Edit([Bind(Include = "OrderID,ProductID,Quantity,TotalCost,DateOrdered,DateShipped,DateReceived,LocationID")] Order orders)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +93,8 @@ namespace StoreFront2.UI.MVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LocationID = new SelectList(db.Locations1, "LocationID", "LocationName", orders.LocationID);
-            ViewBag.ProductID = new SelectList(db.Products1, "ProductID", "ProdName", orders.ProductID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", orders.LocationID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProdName", orders.ProductID);
             return View(orders);
         }
 
@@ -105,7 +105,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Orders orders = db.Orders1.Find(id);
+            Order orders = db.Orders.Find(id);
             if (orders == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace StoreFront2.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Orders orders = db.Orders1.Find(id);
-            db.Orders1.Remove(orders);
+            Order orders = db.Orders.Find(id);
+            db.Orders.Remove(orders);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

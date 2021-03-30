@@ -17,7 +17,7 @@ namespace StoreFront2.UI.MVC.Controllers
         // GET: Locations
         public ActionResult Index()
         {
-            return View(db.Locations1.ToList());
+            return View(db.Locations.ToList());
         }
 
         // GET: Locations/Details/5
@@ -27,7 +27,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Locations locations = db.Locations1.Find(id);
+            Location locations = db.Locations.Find(id);
             if (locations == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LocationID,LocationName,Address,City,State,PostalCode")] Locations locations)
+        public ActionResult Create([Bind(Include = "LocationID,LocationName,Address,City,State,PostalCode")] Location locations)
         {
             if (ModelState.IsValid)
             {
-                db.Locations1.Add(locations);
+                db.Locations.Add(locations);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Locations locations = db.Locations1.Find(id);
+            Location locations = db.Locations.Find(id);
             if (locations == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace StoreFront2.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "LocationID,LocationName,Address,City,State,PostalCode")] Locations locations)
+        public ActionResult Edit([Bind(Include = "LocationID,LocationName,Address,City,State,PostalCode")] Location locations)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Locations locations = db.Locations1.Find(id);
+            Location locations = db.Locations.Find(id);
             if (locations == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace StoreFront2.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Locations locations = db.Locations1.Find(id);
-            db.Locations1.Remove(locations);
+            Location locations = db.Locations.Find(id);
+            db.Locations.Remove(locations);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -14,9 +14,9 @@ namespace StoreFront2.UI.MVC.Models
         [Range(1, byte.MaxValue,ErrorMessage ="*Please enter a Quantity between 1 and 255.")]
         public int Qty { get; set; }
 
-        public Products Product { get; set; }
+        public Product Product { get; set; }
 
-        public CartItemViewModel(int qty, Products product)
+        public CartItemViewModel(int qty, Product product)
         {
             Qty = qty;
             Product = product;

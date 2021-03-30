@@ -39,9 +39,9 @@ namespace StoreFront2.UI.MVC.Controllers
         // GET: ProductStatus/Create
         public ActionResult Create()
         {
-            ViewBag.LocationID = new SelectList(db.Locations1, "LocationID", "LocationName");
-            ViewBag.OrderID = new SelectList(db.Orders1, "OrderID", "OrderID");
-            ViewBag.ProductID = new SelectList(db.Products1, "ProductID", "ProdName");
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID");
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProdName");
             return View();
         }
 
@@ -59,9 +59,9 @@ namespace StoreFront2.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.LocationID = new SelectList(db.Locations1, "LocationID", "LocationName", productStatus.LocationID);
-            ViewBag.OrderID = new SelectList(db.Orders1, "OrderID", "OrderID", productStatus.OrderID);
-            ViewBag.ProductID = new SelectList(db.Products1, "ProductID", "ProdName", productStatus.ProductID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", productStatus.LocationID);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", productStatus.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProdName", productStatus.ProductID);
             return View(productStatus);
         }
 
@@ -77,9 +77,9 @@ namespace StoreFront2.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.LocationID = new SelectList(db.Locations1, "LocationID", "LocationName", productStatus.LocationID);
-            ViewBag.OrderID = new SelectList(db.Orders1, "OrderID", "OrderID", productStatus.OrderID);
-            ViewBag.ProductID = new SelectList(db.Products1, "ProductID", "ProdName", productStatus.ProductID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", productStatus.LocationID);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", productStatus.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProdName", productStatus.ProductID);
             return View(productStatus);
         }
 
@@ -96,9 +96,9 @@ namespace StoreFront2.UI.MVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LocationID = new SelectList(db.Locations1, "LocationID", "LocationName", productStatus.LocationID);
-            ViewBag.OrderID = new SelectList(db.Orders1, "OrderID", "OrderID", productStatus.OrderID);
-            ViewBag.ProductID = new SelectList(db.Products1, "ProductID", "ProdName", productStatus.ProductID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", productStatus.LocationID);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", productStatus.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProdName", productStatus.ProductID);
             return View(productStatus);
         }
 

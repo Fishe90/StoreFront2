@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using StoreFront2.DATA.EF;
 
 namespace StoreFront2.UI.MVC.Controllers
 {
@@ -154,6 +155,16 @@ namespace StoreFront2.UI.MVC.Controllers
                 if (result.Succeeded)
                 {
                     #region Dealing with custom user details
+
+                    UserDetail newUserDeets = new UserDetail();
+                    newUserDeets.UserID = user.Id;
+                    newUserDeets.FirstName = model.FirstName;
+                    newUserDeets.LastName = model.LastName;
+                    newUserDeets.ProfilePic = "";
+
+                    StoreFrontEntities db = new StoreFrontEntities();
+                    db.UserDetails.Add(newUserDeets);
+                    db.SaveChanges();
 
                     #endregion
 

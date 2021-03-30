@@ -4,17 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="StoreFrontModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
+      <Schema Namespace="StoreFrontModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -143,15 +133,14 @@
           <Property Name="Col" Type="smallint" Nullable="false" />
           <Property Name="Row" Type="smallint" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="UserDetails">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfilePic" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Vendors">
           <Key>
@@ -317,7 +306,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="StoreFrontModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -329,7 +317,7 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductStatus" EntityType="Self.ProductStatus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -380,7 +368,8 @@
             <End Role="ProductStatus" EntitySet="ProductStatus" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StoreFrontModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -433,7 +422,7 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="Departments">
+        <EntityType Name="Department">
           <Key>
             <PropertyRef Name="DepID" />
           </Key>
@@ -442,7 +431,7 @@
           <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Departments" FromRole="Departments" ToRole="Employees" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_Departments" FromRole="Departments" ToRole="Products" />
         </EntityType>
-        <EntityType Name="Employees">
+        <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="EmpID" />
           </Key>
@@ -460,7 +449,7 @@
           <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Employees_Departments" FromRole="Employees" ToRole="Departments" />
         </EntityType>
-        <EntityType Name="Locations">
+        <EntityType Name="Location">
           <Key>
             <PropertyRef Name="LocationID" />
           </Key>
@@ -473,7 +462,7 @@
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Locations" FromRole="Locations" ToRole="Orders" />
           <NavigationProperty Name="ProductStatus" Relationship="Self.FK_ProductStatus_Locations" FromRole="Locations" ToRole="ProductStatus" />
         </EntityType>
-        <EntityType Name="Orders">
+        <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
@@ -489,7 +478,7 @@
           <NavigationProperty Name="Product" Relationship="Self.FK_Orders_Products" FromRole="Orders" ToRole="Products" />
           <NavigationProperty Name="ProductStatus" Relationship="Self.FK_ProductStatus_Orders" FromRole="Orders" ToRole="ProductStatus" />
         </EntityType>
-        <EntityType Name="Products">
+        <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
@@ -498,7 +487,7 @@
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="UnitCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="ImgURL" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ImgURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DepID" Type="Int32" Nullable="false" />
           <Property Name="VendorID" Type="Int32" Nullable="false" />
           <Property Name="SKU" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
@@ -517,15 +506,24 @@
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="InStock" Type="Int16" Nullable="false" />
           <Property Name="OrderID" Type="Int32" />
+          <Property Name="IsDiscontinued" Type="Boolean" />
           <Property Name="Section" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Col" Type="Int16" Nullable="false" />
           <Property Name="Row" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Location" Relationship="Self.FK_ProductStatus_Locations" FromRole="ProductStatus" ToRole="Locations" />
           <NavigationProperty Name="Order" Relationship="Self.FK_ProductStatus_Orders" FromRole="ProductStatus" ToRole="Orders" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductStatus_Products" FromRole="ProductStatus" ToRole="Products" />
-          <Property Name="IsDiscontinued" Type="Boolean" />
         </EntityType>
-        <EntityType Name="Vendors">
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProfilePic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Vendor">
           <Key>
             <PropertyRef Name="VendorID" />
           </Key>
@@ -566,8 +564,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_Departments">
-          <End Role="Departments" Type="StoreFrontModel.Departments" Multiplicity="1" />
-          <End Role="Employees" Type="StoreFrontModel.Employees" Multiplicity="*" />
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departments">
               <PropertyRef Name="DepID" />
@@ -578,8 +576,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Departments">
-          <End Role="Departments" Type="StoreFrontModel.Departments" Multiplicity="1" />
-          <End Role="Products" Type="StoreFrontModel.Products" Multiplicity="*" />
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departments">
               <PropertyRef Name="DepID" />
@@ -590,8 +588,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Locations">
-          <End Role="Locations" Type="StoreFrontModel.Locations" Multiplicity="1" />
-          <End Role="Orders" Type="StoreFrontModel.Orders" Multiplicity="*" />
+          <End Role="Locations" Type="Self.Location" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Locations">
               <PropertyRef Name="LocationID" />
@@ -602,7 +600,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductStatus_Locations">
-          <End Role="Locations" Type="StoreFrontModel.Locations" Multiplicity="1" />
+          <End Role="Locations" Type="Self.Location" Multiplicity="1" />
           <End Role="ProductStatus" Type="StoreFrontModel.ProductStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Locations">
@@ -614,8 +612,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Products">
-          <End Role="Products" Type="StoreFrontModel.Products" Multiplicity="1" />
-          <End Role="Orders" Type="StoreFrontModel.Orders" Multiplicity="*" />
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductID" />
@@ -626,7 +624,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductStatus_Orders">
-          <End Role="Orders" Type="StoreFrontModel.Orders" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
           <End Role="ProductStatus" Type="StoreFrontModel.ProductStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
@@ -638,8 +636,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Vendors">
-          <End Role="Vendors" Type="StoreFrontModel.Vendors" Multiplicity="1" />
-          <End Role="Products" Type="StoreFrontModel.Products" Multiplicity="*" />
+          <End Role="Vendors" Type="StoreFrontModel.Vendor" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vendors">
               <PropertyRef Name="VendorID" />
@@ -650,7 +648,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductStatus_Products">
-          <End Role="Products" Type="StoreFrontModel.Products" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductStatus" Type="StoreFrontModel.ProductStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
@@ -670,13 +668,14 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Departments1" EntityType="StoreFrontModel.Departments" />
-          <EntitySet Name="Employees1" EntityType="StoreFrontModel.Employees" />
-          <EntitySet Name="Locations1" EntityType="StoreFrontModel.Locations" />
-          <EntitySet Name="Orders1" EntityType="StoreFrontModel.Orders" />
-          <EntitySet Name="Products1" EntityType="StoreFrontModel.Products" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductStatus1" EntityType="StoreFrontModel.ProductStatus" />
-          <EntitySet Name="Vendors1" EntityType="StoreFrontModel.Vendors" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <EntitySet Name="Vendors" EntityType="StoreFrontModel.Vendor" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -686,64 +685,42 @@
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <AssociationSet Name="FK_Employees_Departments" Association="Self.FK_Employees_Departments">
-            <End Role="Departments" EntitySet="Departments1" />
-            <End Role="Employees" EntitySet="Employees1" />
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Departments" Association="Self.FK_Products_Departments">
-            <End Role="Departments" EntitySet="Departments1" />
-            <End Role="Products" EntitySet="Products1" />
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Locations" Association="Self.FK_Orders_Locations">
-            <End Role="Locations" EntitySet="Locations1" />
-            <End Role="Orders" EntitySet="Orders1" />
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductStatus_Locations" Association="Self.FK_ProductStatus_Locations">
-            <End Role="Locations" EntitySet="Locations1" />
+            <End Role="Locations" EntitySet="Locations" />
             <End Role="ProductStatus" EntitySet="ProductStatus1" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Products" Association="Self.FK_Orders_Products">
-            <End Role="Products" EntitySet="Products1" />
-            <End Role="Orders" EntitySet="Orders1" />
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductStatus_Orders" Association="Self.FK_ProductStatus_Orders">
-            <End Role="Orders" EntitySet="Orders1" />
+            <End Role="Orders" EntitySet="Orders" />
             <End Role="ProductStatus" EntitySet="ProductStatus1" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Vendors" Association="Self.FK_Products_Vendors">
-            <End Role="Vendors" EntitySet="Vendors1" />
-            <End Role="Products" EntitySet="Products1" />
+            <End Role="Vendors" EntitySet="Vendors" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductStatus_Products" Association="Self.FK_ProductStatus_Products">
-            <End Role="Products" EntitySet="Products1" />
+            <End Role="Products" EntitySet="Products" />
             <End Role="ProductStatus" EntitySet="ProductStatus1" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="C__MigrationHistory" EntityType="StoreFrontModel.C__MigrationHistory" />
-          <EntitySet Name="sysdiagrams" EntityType="StoreFrontModel.sysdiagram" />
         </EntityContainer>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -795,16 +772,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Departments1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Departments">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="StoreFrontModel.Department">
               <MappingFragment StoreEntitySet="Departments">
                 <ScalarProperty Name="DepID" ColumnName="DepID" />
                 <ScalarProperty Name="DepName" ColumnName="DepName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Employees1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Employees">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="StoreFrontModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
                 <ScalarProperty Name="DepID" ColumnName="DepID" />
@@ -821,8 +798,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Locations1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Locations">
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="StoreFrontModel.Location">
               <MappingFragment StoreEntitySet="Locations">
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="LocationName" ColumnName="LocationName" />
@@ -833,8 +810,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Orders1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Orders">
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="StoreFrontModel.Order">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
@@ -847,8 +824,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Products">
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="StoreFrontModel.Product">
               <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProdName" ColumnName="ProdName" />
@@ -866,20 +843,30 @@
           <EntitySetMapping Name="ProductStatus1">
             <EntityTypeMapping TypeName="StoreFrontModel.ProductStatus">
               <MappingFragment StoreEntitySet="ProductStatus">
-                <ScalarProperty Name="IsDiscontinued" ColumnName="IsDiscontinued" />
                 <ScalarProperty Name="PSID" ColumnName="PSID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="InStock" ColumnName="InStock" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="IsDiscontinued" ColumnName="IsDiscontinued" />
                 <ScalarProperty Name="Section" ColumnName="Section" />
                 <ScalarProperty Name="Col" ColumnName="Col" />
                 <ScalarProperty Name="Row" ColumnName="Row" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Vendors1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Vendors">
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="StoreFrontModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="StoreFrontModel.Vendor">
               <MappingFragment StoreEntitySet="Vendors">
                 <ScalarProperty Name="VendorID" ColumnName="VendorID" />
                 <ScalarProperty Name="VenName" ColumnName="VenName" />
@@ -898,27 +885,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="StoreFrontModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="StoreFrontModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
